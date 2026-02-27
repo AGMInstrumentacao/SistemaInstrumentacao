@@ -795,10 +795,22 @@ async function startServer() {
   });
 
   // Vite middleware for development
-  if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "dist")));
+  // Rota de teste para verificar se o servidor está respondendo
+  app.get("/api/health", (req, res) => {
+    res.send("Servidor AGM: OK - Rodando no Render");
+  });
+
+  // Servir arquivos estáticos (Frontend)
+  const distPath = path.resolve(__dirname, "dist");
+  
+  // Forçamos o uso da pasta dist se ela existir, ou se estivermos no Render
+  if (process.env.NODE_ENV === "production" || process.env.RENDER) {
+    app.use(express.static(distPath));
+    
+    // Qualquer rota que não seja da API, manda para o index.html do React
     app.get("*", (req, res) => {
-      res.sendFile(path.join(__dirname, "dist", "index.html"));
+      const indexPath = path.join(distPath, "index.html");
+      res.sendFile(indexPath);
     });
   } else {
     const vite = await createViteServer({
