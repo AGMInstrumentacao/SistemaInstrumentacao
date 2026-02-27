@@ -1,46 +1,43 @@
-# Guia de Deploy Passo a Passo - Sistema AGM (Vercel)
+# Guia de Deploy Passo a Passo - Sistema AGM
 
-Este guia explica como colocar seu sistema na internet usando a **Vercel**. É a forma mais rápida de compartilhar seu progresso com outras pessoas.
-
----
-
-## Passo 1: Baixar o Código
-1. No topo direito do AI Studio, clique no ícone de **Download** (setinha para baixo).
-2. Salve o arquivo `.zip` e extraia os arquivos em uma pasta no seu computador.
+Como você teve problemas com o telefone na Vercel, aqui estão as duas melhores alternativas. Escolha a que preferir:
 
 ---
 
-## Passo 2: Criar uma conta no GitHub
-O GitHub é essencial para conectar com a Vercel.
-1. Acesse [github.com](https://github.com) e crie sua conta.
-2. Clique no botão **"+"** -> **New repository**.
-3. Nomeie como `sistema-agm` e clique em **Create repository**.
-4. Clique em **"uploading an existing file"**.
-5. Arraste todos os arquivos da sua pasta (exceto `node_modules`) para a página.
-6. Clique em **Commit changes**.
+## Opção A: Netlify (O que você perguntou)
+O Netlify é fantástico, mas ele é focado em **sites estáticos** (que não têm banco de dados). 
+*   **Como fazer:**
+    1. Crie conta no [netlify.com](https://netlify.com) usando seu GitHub.
+    2. Clique em **"Add new site"** -> **"Import an existing project"**.
+    3. Escolha seu repositório do GitHub.
+*   **Atenção:** Como seu sistema tem um "servidor" e "banco de dados", o Netlify pode não rodar a parte de salvar os dados corretamente sem configurações muito avançadas. **Eu recomendo o Netlify apenas se você quiser mostrar o visual do sistema.**
 
 ---
 
-## Passo 3: Publicar na Vercel
-1. Acesse [vercel.com](https://vercel.com) e entre com sua conta do GitHub.
-2. Clique em **Add New...** -> **Project**.
-3. Clique em **Import** ao lado do repositório `sistema-agm`.
-4. **Não altere nenhuma configuração.** Eu já deixei um arquivo `vercel.json` pronto no seu código que faz tudo sozinho.
-5. Clique em **Deploy**.
+## Opção B: Render.com (A melhor para o seu caso)
+O Render é como o "Netlify para sistemas com banco de dados". Ele é o mais fácil para o seu projeto atual.
+1. Acesse [render.com](https://render.com) e entre com seu GitHub.
+2. Clique em **New +** -> **Web Service**.
+3. Escolha seu repositório `sistema-agm`.
+4. **Configurações:**
+   - **Runtime:** Node
+   - **Build Command:** `npm install && npm run build`
+   - **Start Command:** `npm start`
+5. Clique em **Create Web Service**.
+*   **Vantagem:** Ele vai rodar seu servidor e seu banco de dados SQLite muito melhor que o Netlify.
 
 ---
 
-## Passo 4: Entendendo o Banco de Dados (SQLite)
-Seu sistema usa o SQLite, que salva os dados em um arquivo. Na Vercel:
-*   O sistema é ótimo para **demonstração e testes**.
-*   **Atenção:** Se você cadastrar um instrumento novo, ele pode sumir depois de algumas horas ou dias, pois a Vercel "limpa" os arquivos temporários de tempos em tempos.
-*   Para um sistema de produção real que nunca perde dados, no futuro ajudarei você a configurar um banco de dados persistente.
+## Opção C: Botão "Publish" (A mais rápida de todas)
+Se você quer apenas que a pessoa veja as melhorias **agora**, sem criar conta em lugar nenhum:
+1. No topo direito desta tela aqui no AI Studio, clique em **Publish**.
+2. Confirme a publicação.
+3. Pegue o link no botão **Share** e envie.
+*   **Sem telefone, sem cartão, sem burocracia.**
 
 ---
 
-## Passo 5: Compartilhar
-1. Após o Deploy, a Vercel te dará um link (ex: `sistema-agm.vercel.app`).
-2. Envie esse link para quem você quiser!
+### Minha recomendação:
+Se a Vercel travou, tente o **Render.com** (Opção B). Ele é o "irmão" do Netlify que aceita bancos de dados de forma mais simples para iniciantes.
 
----
-*Dúvidas? É só me chamar!*
+*Dúvidas em algum passo? É só me falar!*
